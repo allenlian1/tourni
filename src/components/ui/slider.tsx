@@ -20,36 +20,21 @@ export function Slider() {
   return (
     <Tabs defaultValue="account" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="profiles">Profiles</TabsTrigger>
+        <TabsTrigger value="players">Players</TabsTrigger>
         <TabsTrigger value="tournaments">Tournaments</TabsTrigger>
       </TabsList>
-      <TabsContent value="profiles">
-        <Card>
-            <CardDescription>
-              Search for profiles here.
-            </CardDescription>
-            <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Input id="input_profile"/>
-            </div>
-            
-          </CardContent>
-        </Card>
+      <TabsContent value="players">
+        Search for players here.
+        <div className="space-y-1">
+          <Input id="input_profile" placeholder="Players" />
+        </div>
       </TabsContent>
 
       <TabsContent value="tournaments">
-        <Card>
-            <CardDescription>
               Search for tournaments here.
-            </CardDescription>
-          <CardContent className="space-y-2">
             <div className="space-y-1">
-              <Input id="input_tournament"/>
+              <Input id="input_tournament" placeholder="Tournaments"/>
             </div>
-            
-          </CardContent>
-
-        </Card>
       </TabsContent>
     </Tabs>
   )
