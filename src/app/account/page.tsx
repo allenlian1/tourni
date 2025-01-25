@@ -12,7 +12,7 @@ import {
 export default async function AccountPage() {
 
   const session = await auth();
-  const elo = 1500
+  const elo = 1900
     return (
       <div>
         <h1 className="flex justify-center mt-10">
