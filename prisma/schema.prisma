@@ -7,8 +7,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model matches {
-  id         String      @id @db.Uuid
+model match {
+  id         String      @id(map: "matches_pkey") @db.Uuid
   teams      String[]    @db.Uuid
   winner     String?     @db.Uuid
   tournament String?     @db.Uuid
@@ -17,22 +17,22 @@ model matches {
   match_type match_type?
 }
 
-model profiles {
-  id      String   @id @db.Uuid
+model profile {
+  id      String   @id(map: "profiles_pkey") @db.Uuid
   history Json[]
   cards   String[] @db.Uuid
   record  Json[]
   elo     Float[]  @db.Real
 }
 
-model teams {
-  id      String   @id @db.Uuid
+model team {
+  id      String   @id(map: "teams_pkey") @db.Uuid
   name    String?
   players String[] @db.Uuid
 }
 
-model Tournament {
-  id              String            @id @db.Uuid
+model tournament {
+  id              String            @id(map: "tournaments_pkey") @db.Uuid
   capacity        Int?
   players         String[]          @db.Uuid
   matches         String[]          @db.Uuid
@@ -40,8 +40,6 @@ model Tournament {
   end_date        DateTime?         @db.Date
   tournament_type tournament_types?
   status          status?
-
-  @@map("tournaments")
 }
 
 enum match_type {
