@@ -37,7 +37,7 @@ export function Slider() {
   return (
     <Tabs defaultValue="profiles" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="profiles">Profiles</TabsTrigger>
+        <TabsTrigger value="players">Players</TabsTrigger>
         <TabsTrigger value="tournaments">Tournaments</TabsTrigger>
       </TabsList>
       <TabsContent value="profiles">
