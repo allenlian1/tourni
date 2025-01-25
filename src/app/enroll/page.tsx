@@ -1,3 +1,6 @@
+"use client";
+import NavBar from "@/components/navbar";
+
 export default function EnrollPage() {
     return (
       <div>

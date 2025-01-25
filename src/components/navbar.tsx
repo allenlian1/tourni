@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { CalendarCheck2, HomeIcon, PlusCircle, Search, Settings } from "lucide-react";
 
 interface NavBarProps {
-  user: User;
+  user?: User;
 }
 
 const btns = [
