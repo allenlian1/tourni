@@ -5,10 +5,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { tournament, status, tournament_types } from "@prisma/client"; // Import Prisma types
+import { tournaments, status, tournament_types } from "@prisma/client"; // Import Prisma types
 
 // Extended type to include additional fields
-type TournamentWithDetails = tournament & {
+type TournamentWithDetails = tournaments & {
   sport: string;
   registrations: number;
 };
