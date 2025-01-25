@@ -18,7 +18,7 @@ import {
 
 export function Slider() {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
+    <Tabs defaultValue="account" className="w-full">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="players">Players</TabsTrigger>
         <TabsTrigger value="tournaments">Tournaments</TabsTrigger>
@@ -31,10 +31,10 @@ export function Slider() {
       </TabsContent>
 
       <TabsContent value="tournaments">
-              Search for tournaments here.
-            <div className="space-y-1">
-              <Input id="input_tournament" placeholder="Tournaments"/>
-            </div>
+        Search for tournaments here.
+        <div className="space-y-1">
+          <Input id="input_tournament" placeholder="Tournaments" />
+        </div>
       </TabsContent>
     </Tabs>
   )
