@@ -17,7 +17,7 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
     return (
       <Card
         onClick={onClick}
-        className="cursor-pointer transition-all hover:bg-muted/50 p-0"
+        className="sm:h-32 cursor-pointer transition-all hover:bg-muted/50 p-0 mb-0"
       >
         <div className="flex flex-col sm:flex-row items-start">
           {/* Tournament Image */}
@@ -32,7 +32,7 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
   
           {/* Tournament Details */}
           <div className="p-4 sm:p-6 flex-1">
-            <div className="flex flex-col sm:flex-col items-start sm:items-end gap-2 sm:gap-4 mb-2">
+            <div className="flex flex-col sm:flex-col items-start sm:items-end gap-2 sm:gap-4">
               <h2 className="text-lg sm:text-xl font-semibold">
                 {name}
               </h2>
@@ -41,7 +41,7 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
               </Badge>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 mb-2">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
               <h2 className="text-lg sm:text-xl font-semibold text-gray-400">
                 {tournament.tournament_name} Tournament
               </h2>
