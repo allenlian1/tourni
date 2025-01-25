@@ -80,19 +80,19 @@ export default function TournamentsPage() {
   return (
     <div>
       <NavBar /> {/* Add the NavBar here */}
-      <div className="p-6">
-        <h1 className="text-3xl font-bold mb-6">Tournaments</h1>
-        <ScrollArea className="h-[calc(100vh-160px)]">
-          <div className="space-y-4 pr-4">
+      <div className="p-4 sm:p-6 pb-20">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Tournaments</h1>
+        <ScrollArea className="h-auto sm:h-[calc(100vh-160px)]">
+          <div className="space-y-4 pr-0 sm:pr-4">
             {sortedTournaments.map((tournament) => (
               <Card
                 key={tournament.id}
                 onClick={() => router.push(`/tournaments/${tournament.id}`)}
                 className="cursor-pointer transition-all hover:bg-muted/50 p-0" // Remove padding here
               >
-                <div className="flex items-start">
+                <div className="flex flex-col sm:flex-row items-start">
                   {/* Tournament Image */}
-                  <div className="relative w-56 h-28 flex-shrink-0 rounded-l-md overflow-hidden"> {/* Rounded left edges */}
+                  <div className="relative w-full sm:w-56 h-32 sm:h-28 flex-shrink-0 rounded-t-md sm:rounded-l-md sm:rounded-t-none overflow-hidden"> {/* Rounded left edges */}
                     <Image
                       src="/badminton-banner.png"
                       alt="Tournament banner"
@@ -102,9 +102,9 @@ export default function TournamentsPage() {
                   </div>
 
                   {/* Tournament Details */}
-                  <div className="p-6 flex-1"> {/* Add padding here for the details */}
-                    <div className="flex items-center gap-4 mb-2">
-                      <h2 className="text-xl font-semibold">
+                  <div className="p-4 sm:p-6 flex-1"> {/* Add padding here for the details */}
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 mb-2">
+                      <h2 className="text-lg sm:text-xl font-semibold">
                         {tournament.tournament_type} Tournament
                       </h2>
                       <Badge variant={tournament.status === status.ongoing ? "default" : "secondary"}>
@@ -112,7 +112,7 @@ export default function TournamentsPage() {
                       </Badge>
                     </div>
 
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-2">
                         <Image
                           src="/badminton-icon.svg"
@@ -123,14 +123,14 @@ export default function TournamentsPage() {
                         <span>{tournament.sport}</span>
                       </div>
 
-                      <span>•</span>
+                      <span className="hidden sm:block">•</span>
 
                       <span>
                         {tournament.start_date ? tournament.start_date.toLocaleDateString() : null} -{" "}
                         {tournament.end_date ? tournament.end_date.toLocaleDateString() : null}
                       </span>
 
-                      <span>•</span>
+                      <span className="hidden sm:block">•</span>
 
                       <span>
                         {tournament.players.length}/{tournament.capacity} 
