@@ -1,0 +1,23 @@
+{
+  "name": "tourni",
+  "version": "1.0.0",
+  "description": "quick and fun tournament tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allenlian1/tourni.git"
+  },
+  "author": "Allen, Oliad, Richard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/allenlian1/tourni/issues"
+  },
+  "homepage": "https://github.com/allenlian1/tourni#readme",
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  }
+}
