@@ -21,8 +21,8 @@ const btns = [
   },
   {
     icon: Search,
-    title: "Enroll",
-    route: "/enroll",
+    title: "Search",
+    route: "/search",
   },
   {
     icon: Settings,
