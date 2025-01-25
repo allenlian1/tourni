@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "./auth";
 
-const protectedRoutes = ["/user"]
+const protectedRoutes = ["/enroll", "/tournaments", "/account"]
 
 export default async function middleware( request: NextRequest ){
     const session = await auth();
