@@ -20,7 +20,7 @@ export default async function AccountPage() {
             <AvatarImage src={session?.user?.image!} alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-        </h1>
+          </h1>
         <div className=" flex justify-center scroll-m-20 text-4xl font-semibold tracking-tight lg:text-3xl mt-4">
           {session?.user?.name}
         </div>
@@ -28,38 +28,24 @@ export default async function AccountPage() {
           {session?.user?.email}
         </div>
 
-        <ELOCard user={session?.user!} elo={1500} w={72} h={60}/>
+        <ELOCard user={session?.user!} elo={1500} w={"w-1/2"} h={"h-full"}/>
 
         <div className="m-6">
           <h1 className="scroll-m-20 text-2xl font-semibold tracking-tight lg:text-3xl">
             Kills
           </h1>
 
-          <div className="flex flex-row columns-3 justify-between items-center">
-            <div className="col-span-1">
-              <ELOCard user={session?.user!} elo={1500} w={72} h={60} />
-            </div>
-            <div className="col-span-1">
-              <ELOCard user={session?.user!} elo={1500} w={72} h={60} />
-            </div>
-            <div className="col-span-1">
-              <ELOCard user={session?.user!} elo={1500} w={72} h={60} />
-            </div>
-          </div>
-          <div className="flex flex-row columns-3 justify-between items-center">
-            <div className="col-span-1">
-              <ELOCard user={session?.user!} elo={1500} w={72} h={60} />
-            </div>
-            <div className="col-span-1">
-              <ELOCard user={session?.user!} elo={1500} w={72} h={60} />
-            </div>
-            <div className="col-span-1">
-              <ELOCard user={session?.user!} elo={1500} w={72} h={60} />
-            </div>
+          <div className="grid grid-cols-3 gap-4 mt-4">
+            <ELOCard user={session?.user!} elo={1500} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={session?.user!} elo={1000} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={session?.user!} elo={2000} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={session?.user!} elo={100} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={session?.user!} elo={1300} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={session?.user!} elo={1100} w={"w-full"} h={"h-50"} isKillCard={true}/>
           </div>
         </div>
 
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-4 mb-20">
           <Button className="bg-white text-muted hover:bg-muted hover:text-white" variant="destructive" onClick={logout}>
             Sign Out
           </Button>
