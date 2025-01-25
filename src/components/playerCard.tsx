@@ -1,7 +1,7 @@
 import { User } from "next-auth";
 
 interface CardProps {
-    user: User,
+    user: string,
     elo: number,
     w: string,
     h: string,
@@ -12,7 +12,7 @@ export function ELOCard({ user , elo, w, h, isKillCard }: CardProps){
     return (
         <div className={`${w} ${h} mx-auto border rounded-lg overflow-hidden bg-white mt-6`}>
         <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center font-bold py-3">
-            {user?.name}
+            {user}
         </div>
         {/* Image Section */}
         <div className="bg-indigo-50 flex justify-center items-center py-4">
