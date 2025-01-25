@@ -9,7 +9,7 @@ export default function SearchPage() {
           <h1 className="scroll-m-20 text-4xl font-semibold tracking-tight lg:text-3xl">
             Search
           </h1>
-          <Slider />
+          <Slider/>
         </div>
       </div>
     );

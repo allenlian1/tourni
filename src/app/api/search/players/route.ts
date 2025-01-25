@@ -1,15 +1,26 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { ELOCard } from "@/components/card";
 
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
-
     console.log("in player search");
     try {
+        const allProfiles = await prisma.profile.findMany();
+        const allCards = [ ELOCard ];
+        allProfiles.forEach((el) => {
+            const card = ELOCard(
+                {
+                    
+                }
+            );
+            allCards.push(card);
+        });
+        console.log(JSON.stringify(allProfiles));
+
         const { searchParams } = new URL(request.url);
         const query = searchParams.get('q');
-        console.log("Query:", query);
 
         const profiles = await prisma.profile.findMany({
             where: {
