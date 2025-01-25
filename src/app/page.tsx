@@ -21,9 +21,6 @@ export default async function Home() {
             />
             tourni
           </a>
-          <h2 className="mt-10 scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0 text-center">
-            You are Not Signed In
-          </h2>
           <LoginForm />
         </div>
       </div>
