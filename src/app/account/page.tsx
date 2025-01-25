@@ -8,7 +8,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import { ELOCard } from "@/components/card";
+import { ELOCard } from "@/components/playerCard";
 
 export default async function AccountPage() {
 
@@ -28,7 +28,7 @@ export default async function AccountPage() {
           {session?.user?.email}
         </div>
 
-        <ELOCard user={session?.user!} elo={1500} w={"w-1/2"} h={"h-full"}/>
+        <ELOCard user={"Ramil"} elo={1500} w={"w-1/2"} h={"h-full"}/>
 
         <div className="m-6">
           <h1 className="scroll-m-20 text-2xl font-semibold tracking-tight lg:text-3xl">
@@ -36,12 +36,12 @@ export default async function AccountPage() {
           </h1>
 
           <div className="grid grid-cols-3 gap-4 mt-4">
-            <ELOCard user={session?.user!} elo={1500} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={session?.user!} elo={1000} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={session?.user!} elo={2000} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={session?.user!} elo={100} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={session?.user!} elo={1300} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={session?.user!} elo={1100} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={"h"} elo={1500} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={"h"} elo={1000} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={"h"} elo={2000} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={"h"} elo={100} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={"h"} elo={1300} w={"w-full"} h={"h-50"} isKillCard={true}/>
+            <ELOCard user={"h"} elo={1100} w={"w-full"} h={"h-50"} isKillCard={true}/>
           </div>
         </div>
 
