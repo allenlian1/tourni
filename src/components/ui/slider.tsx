@@ -61,7 +61,7 @@ export function Slider() {
   };
 
   return (
-    <Tabs defaultValue="players" className="w-[400px]">
+    <Tabs defaultValue="players" className="w-[600px]">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="players">Players</TabsTrigger>
         <TabsTrigger value="tournaments">Tournaments</TabsTrigger>

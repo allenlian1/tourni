@@ -21,7 +21,7 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
       >
         <div className="flex flex-col sm:flex-row items-start">
           {/* Tournament Image */}
-          <div className="relative w-full sm:w-56 h-32 sm:h-28 flex-shrink-0 rounded-t-md sm:rounded-l-md sm:rounded-t-none overflow-hidden">
+          <div className="relative w-full sm:w-56 h-32 sm:h-32 flex-shrink-0 rounded-t-md sm:rounded-l-md sm:rounded-r-none overflow-hidden">
             <Image
               src="/badminton-banner.png"
               alt="Tournament banner"
@@ -32,7 +32,7 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
   
           {/* Tournament Details */}
           <div className="p-4 sm:p-6 flex-1">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 mb-2">
+            <div className="flex flex-col sm:flex-col items-start sm:items-end gap-2 sm:gap-4 mb-2">
               <h2 className="text-lg sm:text-xl font-semibold">
                 {name}
               </h2>
