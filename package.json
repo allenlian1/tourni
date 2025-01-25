@@ -3,13 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
+    "dev": "prisma generate && next dev --turbopack",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "migration:create": "prisma migrate dev --create-only",
+    "migrate": "prisma migrate deploy"
   },
   "dependencies": {
+    "@auth/pg-adapter": "^1.7.4",
     "@auth/prisma-adapter": "^2.7.4",
+    "@prisma/adapter-neon": "^6.2.1",
     "@prisma/client": "^6.2.1",
     "@prisma/extension-accelerate": "^1.2.1",
     "@radix-ui/react-avatar": "^1.1.2",
