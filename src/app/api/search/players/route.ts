@@ -5,11 +5,11 @@ const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
 
-    console.log("in search");
+    console.log("in player search");
     try {
         const { searchParams } = new URL(request.url);
         const query = searchParams.get('q');
-        //console.log("QUERY:", query);
+        console.log("Query:", query);
 
         const profiles = await prisma.profile.findMany({
             where: {

@@ -18,18 +18,17 @@ export function Slider() {
   // State to store the input values
   const [profileInput, setProfileInput] = useState("");
   const [tournamentInput, setTournamentInput] = useState("");
-  const [results, setResults] = useState();
 
   const handleProfileInputKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      const data = await fetch(`/api/search?q=${profileInput}`);
+      const data = await fetch(`/api/search/players?q=${profileInput}`);
       const profile = await data.json();
     }
   };
 
   const handleTournamentInputKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      const data = await fetch(`/api/search?q=${tournamentInput}`);
+      const data = await fetch(`/api/search/tournaments?q=${tournamentInput}`);
       const tournament = await data.json();
     }
   };
