@@ -31,7 +31,7 @@ model teams {
   players String[] @db.Uuid
 }
 
-model tournaments {
+model Tournament {
   id              String            @id @db.Uuid
   capacity        Int?
   players         String[]          @db.Uuid
@@ -40,6 +40,8 @@ model tournaments {
   end_date        DateTime?         @db.Date
   tournament_type tournament_types?
   status          status?
+
+  @@map("tournaments")
 }
 
 enum match_type {
