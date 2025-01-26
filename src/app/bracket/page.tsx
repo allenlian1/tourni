@@ -1,14 +1,16 @@
 "use client";
-import Bracket from "@/bracket_test";
+import Bracket from "@/temp_bracket";
+import NavBar from "@/components/navbar";
 
-
-export default function BracketsPage() {
-    console.log("hello world");
-    return (
-      <div className="w-full flex-col justify-center items-center">
-        <div className="w-11/12 flex flex-col justify-center items-center pt-4 pl-4">
-          <Bracket/>
+export default function SearchPage() {
+  return (
+    <div className="h-screen flex flex-col">
+      <NavBar /> 
+      <div className="flex-1 relative overflow-hidden pt-16">
+        <div className="absolute inset-0 overflow-auto">
+          <Bracket />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}

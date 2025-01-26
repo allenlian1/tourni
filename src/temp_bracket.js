@@ -5,25 +5,25 @@ export default function Bracket() {
     return <SingleElimination />;
   }
   
-  export const SingleElimination = () => (
-    <SingleEliminationBracket
-      matches={simpleSmallBracket}
-      matchComponent={Match}
-      svgWrapper={({ children, ...props }) => (
-        <SVGViewer
-          width={10000}
-          height={5000}
-          background="rgb(11, 13, 19)"
-          SVGBackground="rgb(11, 13, 19)"
-          {...props}
-        >
-          {children}
-        </SVGViewer>
-      )}
-      onMatchClick={(match) => console.log(match)}
-      onPartyClick={(match) => console.log(match)}
-    />
-  );
+export const SingleElimination = () => (
+  <SingleEliminationBracket
+    matches={simpleSmallBracket}
+    matchComponent={Match}
+    svgWrapper={({ children, ...props }) => (
+      <SVGViewer
+        width={10000}
+        height={5000}
+        background="rgb(11, 13, 19)"
+        SVGBackground="rgb(11, 13, 19)"
+        {...props}
+      >
+        {children}
+      </SVGViewer>
+    )}
+    onMatchClick={(match) => console.log(match)}
+    onPartyClick={(match) => console.log(match)}
+  />
+);
   
   
   export const simpleSmallBracket = [

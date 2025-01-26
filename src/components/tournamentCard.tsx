@@ -14,7 +14,7 @@ export function TournamentCard({ tournament, onClick }: TournamentCardProps) {
     return (
       <Card
         onClick={onClick}
-        className="sm:h-32 h-auto cursor-pointer transition-all hover:bg-muted/50 p-0 mb-4"
+        className="sm:h-32 h-auto cursor-pointer transition-all hover:bg-muted/50 p-0 mb-4 shadow-lg"
       >
         <div className="flex flex-col sm:flex-row w-full">
           {/* Tournament Image */}

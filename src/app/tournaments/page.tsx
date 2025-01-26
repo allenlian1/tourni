@@ -82,7 +82,7 @@ export default function TournamentsPage() {
   });
 
   return (
-    <div>
+    <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-svh text-white">
       <NavBar />
       <div className="p-4 sm:p-6 pb-20">
         <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Tournaments</h1>

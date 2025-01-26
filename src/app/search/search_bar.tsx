@@ -88,7 +88,7 @@ export function Slider() {
       </TabsList>
 
       <TabsContent value="players">
-        <Card>
+        <Card className="bg-bg-gradient-to-br from-gray-900 to-gray-800">
           <CardContent className="p-0 pt-0">
             <div className="space-y-1 p-4">
               <Input
@@ -151,7 +151,7 @@ export function Slider() {
         </ScrollArea>
       </TabsContent>
       <TabsContent value="tournaments">
-        <Card>
+        <Card className="bg-bg-gradient-to-br from-gray-900 to-gray-800">
           <CardContent className="p-0 pt-0">
             <div className="space-y-1 p-4">
               <Input

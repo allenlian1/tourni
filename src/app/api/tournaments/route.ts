@@ -3,23 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request){
+export async function GET(){
+    console.log("in tournaments");
     try {
-        const { searchParams } = new URL(request.url);
-        let tournament;
-
-        if (!searchParams.has('id')){
-            tournament = await prisma.tournament.findMany({});
-        } else {
-            const id = searchParams.get('id');
-            tournament = await prisma.tournament.findFirst({
-                where:  {
-                    id: {
-                        equals: id!
-                    }
-                }
-            });
-        }
+        const tournament = await prisma.tournament.findMany();
 
         if (!tournament){
             console.error("No data returned")
