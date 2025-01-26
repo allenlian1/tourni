@@ -30,9 +30,9 @@ export default function TournamentsPage() {
       try {
         const response = await fetch(`/api/tournaments`);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch tournaments");
-        }
+        // if (!response.ok) {
+        //   throw new Error("Failed to fetch tournaments");
+        // }
 
         const data = await response.json();
 
@@ -87,7 +87,7 @@ export default function TournamentsPage() {
               <TournamentCard
                 key={tournament.id}
                 tournament={tournament}
-                registrations={tournament.players?.length || 0}
+                // registrations={tournament.players?.length || 0}
                 onClick={() => router.push(`/tournaments/${tournament.id}`)}
               />
             ))}
