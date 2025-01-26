@@ -9,16 +9,17 @@ import { login } from "@/lib/actions/auth";
 export default async function Home() {
   const session = await auth();
   const matches = [
-    { date: "Jan 26, 2025", team1: "Team A", team2: "Team B", time: "5:00 PM" },
-    { date: "Jan 27, 2025", team1: "Team A", team2: "Team C", time: "6:30 PM" },
-    { date: "Jan 28, 2025", team1: "Team A", team2: "Team D", time: "8:00 PM" },];
-    const playerStats = { name: "Player 1", matchesPlayed: 10, matchesWon: 7, matchesLost: 3, elo: 1500 };
+    { date: "Jan 26, 2025", team1: "Chargers", team2: "Hawks", time: "5:00 PM" },
+    { date: "Jan 27, 2025", team1: "Raiders", team2: "Rebels", time: "6:30 PM" },
+    { date: "Jan 28, 2025", team1: "Lions", team2: "Spartans", time: "8:00 PM" },
+  ];
+  const playerStats = { name: session?.user?.name, matchesPlayed: 11, matchesWon: 7, matchesLost: 3, elo: 1500 };
 
-  if (!session?.user){
+  if (!session?.user) {
     return (
-      <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-muted p-6 md:p-10">
+      <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-gradient-to-br from-gray-900 to-gray-800 p-6 md:p-10">
         <div className="flex w-full max-w-sm flex-col gap-6">
-          <a href="#" className="flex items-center gap-2 self-center font-medium">
+          <a href="#" className="flex items-center gap-2 self-center font-medium text-white hover:text-gray-300 transition-colors">
             <img
               src="crown-white.png"
               alt="Tourni Logo"
@@ -32,45 +33,46 @@ export default async function Home() {
     );
   } else {
     return (
-      <div>
-        <h1>
-          <Dashboard user={session.user}/> 
-          {/* Replace ^ with {children} */}
-          <section>
-                <h2 className="m-6 text-2xl font-bold mb-4">Upcoming Matches</h2>
-                <div className="m-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {matches.map((match, index) => (
-                        <div key={index} className="p-4 bg-gray-800 rounded-lg shadow-md">
-                            <p className="text-sm text-gray-400">{match.date}</p>
-                            <h3 className="text-lg font-semibold">{match.team1} vs {match.team2}</h3>
-                            <p className="text-sm text-gray-400">{match.time}</p>
-                        </div>
-                    ))}
+      <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-svh text-white">
+        <NavBar user={session.user} />
+        <div className="container mx-auto p-6">
+          <Dashboard user={session.user} />
+          <section className="my-8">
+            <h2 className="text-3xl font-bold mb-6">Upcoming Matches</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {matches.map((match, index) => (
+                <div key={index} className="p-4 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                  <h3 className="text-xl font-semibold">{match.team1} vs {match.team2}</h3>
+                  <div className="flex justify-between items-center mt-2">
+                    <p className="text-sm text-gray-400">{match.date}</p>
+                    <p className="text-sm text-gray-400">{match.time}</p>
+                  </div>
                 </div>
-            </section>
-            <section>
-                <h2 className="m-6 text-2xl font-bold mb-4">Your Stats</h2>
-                <div className="m-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <div className="p-4 bg-gray-800 rounded-lg shadow-md">
-                        <h3 className="text-lg font-semibold">Matches Played</h3>
-                        <p className="text-sm text-gray-400">{playerStats.matchesPlayed}</p>
-                    </div>
-                    <div className="p-4 bg-gray-800 rounded-lg shadow-md">
-                        <h3 className="text-lg font-semibold">Matches Won</h3>
-                        <p className="text-sm text-gray-400">{playerStats.matchesWon}</p>
-                    </div>
-                    <div className="p-4 bg-gray-800 rounded-lg shadow-md">
-                        <h3 className="text-lg font-semibold">Matches Lost</h3>
-                        <p className="text-sm text-gray-400">{playerStats.matchesLost}</p>
-                    </div>
-                    <div className="p-4 bg-gray-800 rounded-lg shadow-md">
-                        <h3 className="text-lg font-semibold">Elo</h3>
-                        <p className="text-sm text-gray-400">{playerStats.elo}</p>
-                    </div>
-                </div>
-            </section>
-          <NavBar user={session.user} />
-        </h1>
+              ))}
+            </div>
+          </section>
+          <section className="my-8">
+            <h2 className="text-3xl font-bold mb-6">Your Stats</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 className="text-lg font-semibold">Matches Played</h3>
+                <p className="text-sm text-gray-400">{playerStats.matchesPlayed}</p>
+              </div>
+              <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 className="text-lg font-semibold">Matches Won</h3>
+                <p className="text-sm text-gray-400">{playerStats.matchesWon}</p>
+              </div>
+              <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 className="text-lg font-semibold">Matches Lost</h3>
+                <p className="text-sm text-gray-400">{playerStats.matchesLost}</p>
+              </div>
+              <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                <h3 className="text-lg font-semibold">Elo</h3>
+                <p className="text-sm text-gray-400">{playerStats.elo}</p>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     );
   }

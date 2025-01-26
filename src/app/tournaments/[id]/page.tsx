@@ -69,4 +69,16 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
       )}
     </div>
   );
+    
+    return (
+        <div>
+            <div className="m-4">
+                <h2 className="flex justify-between items-center scroll-m-20 text-3xl font-semibold tracking-tight lg:text-3xl mt-6 ml-4">
+                    Tournament Name
+                    </h2>
+                <h2 className="flex justify-between items-center scroll-m-20 text-xl font-semibold tracking-tight lg:text-xl ml-4 text-gray-400">
+                    Tournament Type
+                </h2>
+            </div>
+    </div>    );
 }
