@@ -55,21 +55,30 @@ export function Slider() {
 
   const handleTournamentInputKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      const data = await fetch(`/api/search/tournaments?q=${tournamentInput}`);
-      const results = await data.json();
-      setSearchResults(results.map((result: any) => ({
-        id: result.id,
-        name: result.name,
-        type: "tournament",
-        sport: result.sport,
-        start_date: new Date(result.start_date),
-        end_date: new Date(result.end_date),
-        status: result.status,
-        capacity: result.capacity,
-        players: result.players
-      })));
+      try {
+        const response = await fetch(`/api/search/tournaments?q=${tournamentInput}`);
+        const data = await response.json();
+        console.log(data);
+
+        const tournaments = data.map((tournament: any) => ({
+          id: tournament.id,
+          name: tournament.name,
+          type: "tournament",
+          sport: tournament.sport || "Unknown",
+          start_date: tournament.start_date ? new Date(tournament.start_date) : null,
+          end_date: tournament.end_date ? new Date(tournament.end_date) : null,
+          status: tournament.status || "Unknown",
+          capacity: tournament.capacity || 0,
+          players: tournament.players || [],
+        }));
+  
+        setSearchResults(tournaments);
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
     }
   };
+  
 
   return (
     <Tabs defaultValue="players" className="w-full max-w-[1600px] mx-auto px-4">
