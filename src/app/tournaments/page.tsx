@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation"; // Use the navigation hook
 import NavBar from "@/components/navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TournamentCard } from "@/components/tournamentCard";
-import { tournaments, status, tournament_types } from "@prisma/client";
+import { tournament, status, tournament_types } from "@prisma/client";
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 // Extended type to include additional fields
-type TournamentWithDetails = tournaments & {
+type TournamentWithDetails = tournament & {
   sport: string;
   registrations: number;
 };
@@ -82,25 +84,21 @@ export default function TournamentsPage() {
       <div className="p-4 sm:p-6 pb-20">
         <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Tournaments</h1>
         <ScrollArea className="h-auto sm:h-[calc(100vh-160px)]">
-          
-          <div className="flex flex-col space-y-3">
-            <Skeleton className="h-[125px] w-[250px] rounded-xl" />
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-[250px]" />
-              <Skeleton className="h-4 w-[200px]" />
+        <div className="flex flex-col items-center space-y-3 mb-4">
+            <Skeleton className="h-[125px] w-[100%] sm:w-[250px] rounded-xl" />
+            <div className="space-y-2 w-full">
+              <Skeleton className="h-4 w-[80%] sm:w-[250px]" />
+              <Skeleton className="h-4 w-[60%] sm:w-[200px]" />
             </div>
-          </div>
-
-          <div className="space-y-4 pr-0 sm:pr-0">
+        </div>
             {sortedTournaments.map((tournament) => (
               <TournamentCard
                 key={tournament.id}
                 tournament={tournament}
-                // registrations={tournament.players?.length || 0}
+                registrations={tournament.players?.length || 0}
                 onClick={() => router.push(`/tournaments/${tournament.id}`)}
               />
             ))}
-          </div>
         </ScrollArea>
       </div>
     </div>
