@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/navbar";
 import { auth } from "@/auth";
 import SocketProvider from "../../providers/SocketProvider"
+import { Providers } from './providers';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +31,7 @@ export default async function RootLayout({
     <html lang="en">
       <SocketProvider>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          {children} {/* This renders the page content */}
+        <Providers>{children}</Providers> {/* This renders the page content */}
           {session?.user && <NavBar />}
         </body>
       </SocketProvider>

@@ -1,4 +1,7 @@
+"use client";
 import { auth } from "@/auth";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import NavBar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -9,23 +12,50 @@ import {
   AvatarImage,
 } from "@/components/ui/avatar"
 import { ELOCard } from "@/components/playerCard";
+import { User } from "@auth/core/types";
+import { profile } from "@prisma/client";
 
-export default async function AccountPage() {
+export default function AccountPage() {
+  const [userData, setUserData] = useState<profile>();
+  const [isLoading, setLoading] = useState<boolean>(true);
+ 
+  useEffect(()=> {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`/api/user`);
+        const res = await response.json();
+    
+        console.log("DATA BEING DISPLAYED", res.data)
+    
+        setUserData(res.data);
+        setLoading(false);
+    
+      } catch (error) {
+        console.error(error);
+        return;
+      }
+    }
 
-  const session = await auth();
+    fetchData();
+  }, []);
+
     return (
-      <div>
-        <h1 className="flex justify-center mt-10">
+      <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-svh text-white">
+        {isLoading
+        ?<></>
+        : <div>
+        <h1 className="flex justify-center pt-10">
           <Avatar className="h-16 w-16">
-            <AvatarImage src={session?.user?.image!} alt="@shadcn" />
+            {/* <AvatarImage src={session?.user?.image!} alt="@shadcn" /> */}
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           </h1>
         <div className=" flex justify-center scroll-m-20 text-4xl font-semibold tracking-tight lg:text-3xl mt-4">
-          {session?.user?.name}
+          {/* {session?.user?.name} */}
+          {userData!.name}
         </div>
         <div className=" flex justify-center scroll-m-20 text-medium font-semibold tracking-tight text-gray-500 lg:text-3xl mt-1">
-          {session?.user?.email}
+          {/* {session?.user?.email} */}
         </div>
 
         <ELOCard user={"Ramil"} elo={1500} w={"w-1/2"} h={"h-full"}/>
@@ -36,26 +66,17 @@ export default async function AccountPage() {
           </h1>
 
           <div className="grid grid-cols-3 gap-4 mt-4">
-            <ELOCard user={"h"} elo={1500} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={"h"} elo={1000} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={"h"} elo={2000} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={"h"} elo={100} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={"h"} elo={1300} w={"w-full"} h={"h-50"} isKillCard={true}/>
-            <ELOCard user={"h"} elo={1100} w={"w-full"} h={"h-50"} isKillCard={true}/>
+          {userData!.cards.map((card)=>
+          <ELOCard user={card} elo={1500} w={"w-full"} h={"h-50"} isKillCard={true}/>)}
           </div>
         </div>
-
-        <div className="flex justify-center mt-4 mb-20">
+        <div className="flex justify-center pt-4 pb-20">
           <Button className="bg-white text-muted hover:bg-muted hover:text-white" variant="destructive" onClick={logout}>
             Sign Out
           </Button>
         </div>
-
-        {
-          (true)
-          ? <div></div>
-          : <div></div>
-        }
+      </div>
+}
       </div>
     );
   }

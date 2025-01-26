@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { tournament, status, tournament_types } from "@prisma/client";
+import { TournamentTable } from "./tournament_bar";
 
 interface TournamentData {
   id: string,
@@ -26,10 +28,10 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
     const fetchTournament = async () => {
       try {
         const id = (await params).id;
-        const response = await fetch(`/api/search/tournaments?id=${id}`);
+        const response = await fetch(`/api/tournaments?id=${id}`);
         const res = await response.json();
 
-        console.log("DATA WORKED: ", res.data);
+        console.log("DATA WORKED: ", res);
         setTournament(res.data); // Set the fetched data to state
       } catch (err: any) {
         console.error("Error: ", err.message);
@@ -51,39 +53,23 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
   }
 
   return (
-    <div className="m-4">
+    <div className="h-screen flex flex-col p-6">
       {tournament && (
-        <div>
-          <h3>
-            {tournament.name}
-          </h3>
-          <p>
-            Start Date: {new Date(tournament.start_date).toLocaleDateString()}
+        <div className="border-b pb-4 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center6">
+          <h1 className="text-3xl font-bold mb-2 sm:mb-0">Tournament Name{tournament.name}</h1>
+          <p className="text-sm text-gray-300 flex flex-wrap items-center">
+            <span>
+              {new Date(tournament.start_date).toLocaleDateString()} - {new Date(tournament.end_date).toLocaleDateString()}
+            </span>
+            <span className="ml-4 font-medium">Capacity: {tournament.capacity}</span>
           </p>
-          <p>
-            End Date: {new Date(tournament.end_date).toLocaleDateString()}
-          </p>
-          <p>
-            Status: {tournament.status}
-          </p>
-          <p>
-            Capacity: {tournament.capacity}
-          </p>
-          <Card className="w-[350px]">
-            <CardContent>
-            </CardContent>
-            <CardFooter className="flex justify-end gap-6">
-              <CardDescription>BADMINTON HAPPENING NOW</CardDescription>
-              <Button
-                // onClick={() => router.push(`/video/${tournament.stream_id}`)}
-                onClick={() => router.push(window.location.href+`/video`)}
-              >
-                View
-              </Button>
-            </CardFooter>
-          </Card>
         </div>
       )}
+      <div className="flex-1 relative overflow-hidden pt-6 sm:pt-16">
+        <div className="absolute inset-0 overflow-auto">
+          <TournamentTable />
+        </div>
+      </div>
     </div>
   );
 }

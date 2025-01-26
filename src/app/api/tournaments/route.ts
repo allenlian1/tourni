@@ -4,11 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function GET(){
+    console.log("in tournaments");
     try {
-        const tournament = await prisma.tournament.findMany(
-            {
-
-        });
+        const tournament = await prisma.tournament.findMany();
 
         if (!tournament){
             console.error("No data returned")

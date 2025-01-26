@@ -55,21 +55,30 @@ export function Slider() {
 
   const handleTournamentInputKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      const data = await fetch(`/api/search/tournaments?q=${tournamentInput}`);
-      const results = await data.json();
-      setSearchResults(results.map((result: any) => ({
-        id: result.id,
-        name: result.name,
-        type: "tournament",
-        sport: result.sport,
-        start_date: new Date(result.start_date),
-        end_date: new Date(result.end_date),
-        status: result.status,
-        capacity: result.capacity,
-        players: result.players
-      })));
+      try {
+        const response = await fetch(`/api/search/tournaments?q=${tournamentInput}`);
+        const data = await response.json();
+        console.log(data);
+
+        const tournaments = data.map((tournament: any) => ({
+          id: tournament.id,
+          name: tournament.name,
+          type: "tournament",
+          sport: tournament.sport || "Unknown",
+          start_date: tournament.start_date ? new Date(tournament.start_date) : null,
+          end_date: tournament.end_date ? new Date(tournament.end_date) : null,
+          status: tournament.status || "Unknown",
+          capacity: tournament.capacity || 0,
+          players: tournament.players || [],
+        }));
+  
+        setSearchResults(tournaments);
+      } catch (err) {
+        console.error("Fetch error:", err);
+      }
     }
   };
+  
 
   return (
     <Tabs defaultValue="players" className="w-full max-w-[1600px] mx-auto px-4">
@@ -79,25 +88,21 @@ export function Slider() {
       </TabsList>
 
       <TabsContent value="players">
-        <Card>
-          <CardContent className="p-0 pt-0">
-            <div className="space-y-1 p-4">
-              <Input
-                id="input_profile"
-                value={profileInput}
-                onChange={(e) => setProfileInput(e.target.value)}
-                onKeyDown={handleProfileInputKeyDown}
-                placeholder="Search for players here"
-                className="p-3"
-              />
-            </div>
-            <div className="space-y-4">
-              {eloCards.map((props, index) => (
-                <ELOCard key={index} {...props} />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="space-y-1 p-4">
+          <Input
+            id="input_profile"
+            value={profileInput}
+            onChange={(e) => setProfileInput(e.target.value)}
+            onKeyDown={handleProfileInputKeyDown}
+            placeholder="Search for players here"
+            className="p-3"
+          />
+        </div>
+        <div className="space-y-4">
+          {eloCards.map((props, index) => (
+            <ELOCard key={index} {...props} />
+          ))}
+        </div>
         <ScrollArea className="h-[calc(100vh-200px)] mt-4">
           <div className="space-y-4 pr-0 sm:pr-4">
             {searchResults
@@ -142,21 +147,17 @@ export function Slider() {
         </ScrollArea>
       </TabsContent>
       <TabsContent value="tournaments">
-        <Card>
-          <CardContent className="p-0 pt-0">
-            <div className="space-y-1 p-4">
-              <Input
-                id="input_tournament"
-                value={tournamentInput}
-                onChange={(e) => setTournamentInput(e.target.value)}
-                onKeyDown={handleTournamentInputKeyDown}
-                placeholder="Search for tournaments here"
-                className="p-3"
-              />
-            </div>
-          </CardContent>
-        </Card>
-        <ScrollArea className="h-[calc(100vh-200px)] mt-4">
+        <div className="space-y-1 p-4">
+          <Input
+            id="input_tournament"
+            value={tournamentInput}
+            onChange={(e) => setTournamentInput(e.target.value)}
+            onKeyDown={handleTournamentInputKeyDown}
+            placeholder="Search for tournaments here"
+            className="p-3"
+          />
+        </div>
+        <ScrollArea className="h-[calc(99vh200px)] mt-4">
           <div className="space-y-4 pr-0 sm:pr-4">
             {searchResults
               .filter((result) => result.type === "tournament")
