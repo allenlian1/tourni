@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { TournamentTable } from "./tournament_bar";
 
 interface TournamentData {
   id: string,
@@ -51,12 +52,12 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
   }
 
   return (
-    <div className="m-4">
+    <div className="h-screen flex flex-col">
       {tournament && (
         <div>
-          <h3>
-            {tournament.name}
-          </h3>
+          <p>
+            Name: {tournament.name}
+          </p>
           <p>
             Start Date: {new Date(tournament.start_date).toLocaleDateString()}
           </p>
@@ -64,26 +65,15 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
             End Date: {new Date(tournament.end_date).toLocaleDateString()}
           </p>
           <p>
-            Status: {tournament.status}
-          </p>
-          <p>
             Capacity: {tournament.capacity}
           </p>
-          <Card className="w-[350px]">
-            <CardContent>
-            </CardContent>
-            <CardFooter className="flex justify-end gap-6">
-              <CardDescription>BADMINTON HAPPENING NOW</CardDescription>
-              <Button
-                // onClick={() => router.push(`/video/${tournament.stream_id}`)}
-                onClick={() => router.push(window.location.href+`/video`)}
-              >
-                View
-              </Button>
-            </CardFooter>
-          </Card>
         </div>
-      )}
+        )}
+      <div className="flex-1 relative overflow-hidden pt-16">
+        <div className="absolute inset-0 overflow-auto">
+          <TournamentTable />
+        </div>
+      </div>
     </div>
   );
 }
