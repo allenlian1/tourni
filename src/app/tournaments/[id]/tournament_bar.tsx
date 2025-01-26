@@ -22,9 +22,8 @@ export function TournamentTable() {
     <Tabs defaultValue="account" className="w-[400px]">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="bracket">Bracket</TabsTrigger>
-        <TabsTrigger value="teams">Teams</TabsTrigger>
+        <TabsTrigger value="players">Players</TabsTrigger>
         <TabsTrigger value="livestream">Livestream</TabsTrigger>
-
       </TabsList>
 
       <TabsContent value="bracket">
@@ -37,7 +36,7 @@ export function TournamentTable() {
         </Card>
       </TabsContent>
 
-      <TabsContent value="player">
+      <TabsContent value="players">
         <Card>
           <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
             
