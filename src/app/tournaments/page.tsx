@@ -1,44 +1,19 @@
-"use client";
+"use client"; // Mark the entire page as a Client Component
+
+import { useState, useEffect } from "react"; // Use hooks for state and effects
+import { useRouter } from "next/navigation"; // Use the navigation hook
 import NavBar from "@/components/navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useRouter } from "next/navigation";
-import { tournaments, status, tournament_types } from "@prisma/client";
 import { TournamentCard } from "@/components/tournamentCard";
+import { tournament, status, tournament_types } from "@prisma/client";
 
 // Extended type to include additional fields
-type TournamentWithDetails = tournaments & {
+type TournamentWithDetails = tournament & {
   sport: string;
   registrations: number;
 };
 
-const generateMockTournaments = (): TournamentWithDetails[] => {
-  const now = new Date();
-
-  return Array.from({ length: 15 }).map((_, i) => {
-    const startDate = new Date(now);
-    startDate.setDate(startDate.getDate() + (i - 7));
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 3);
-
-    const status = calculateStatus(startDate, endDate);
-
-    return {
-      id: crypto.randomUUID(),
-      capacity: 100,
-      players: Array.from({ length: Math.floor(Math.random() * 50) + 50 }).map(
-        () => crypto.randomUUID()
-      ),
-      matches: [],
-      start_date: startDate,
-      end_date: endDate,
-      tournament_type: tournament_types.single_elimination,
-      status,
-      sport: "Badminton",
-      registrations: Math.floor(Math.random() * 50) + 50,
-    };
-  });
-};
-
+// Calculate the status of a tournament based on its start and end dates
 function calculateStatus(startDate: Date, endDate: Date): status {
   const now = new Date();
   if (now > endDate) return status.finished;
@@ -48,7 +23,36 @@ function calculateStatus(startDate: Date, endDate: Date): status {
 
 export default function TournamentsPage() {
   const router = useRouter();
-  const tournaments = generateMockTournaments();
+  const [tournaments, setTournaments] = useState<TournamentWithDetails[]>([]); // State for tournaments
+
+  useEffect(() => {
+    const fetchTournaments = async () => {
+      try {
+        const response = await fetch(`/api/tournaments`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch tournaments");
+        }
+
+        const data = await response.json();
+
+        const formattedTournaments = data.map((tournament: any) => ({
+          ...tournament,
+          start_date: new Date(tournament.start_date),
+          end_date: new Date(tournament.end_date),
+          status: calculateStatus(new Date(tournament.start_date), new Date(tournament.end_date)),
+          sport: tournament.sport || "Badminton", // Default to "Unknown" if sport is not provided
+          registrations: tournament.players?.length || 0, // Use players array length as registrations count
+        }));
+
+        setTournaments(formattedTournaments);
+      } catch (error) {
+        console.error("Error fetching tournaments:", error);
+      }
+    };
+
+    fetchTournaments();
+  }, []); // Empty dependency array ensures this runs only once on mount
 
   const statusOrder: Record<status, number> = {
     [status.ongoing]: 1,
@@ -56,6 +60,7 @@ export default function TournamentsPage() {
     [status.finished]: 3,
   };
 
+  // Sort tournaments by status and start date
   const sortedTournaments = [...tournaments].sort((a, b) => {
     const aStatus = a.status || status.upcoming;
     const bStatus = b.status || status.upcoming;
@@ -77,11 +82,12 @@ export default function TournamentsPage() {
       <div className="p-4 sm:p-6 pb-20">
         <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Tournaments</h1>
         <ScrollArea className="h-auto sm:h-[calc(100vh-160px)]">
-          <div className="space-y-4 pr-0 sm:pr-4">
+          <div className="space-y-4 pr-0 sm:pr-0">
             {sortedTournaments.map((tournament) => (
               <TournamentCard
                 key={tournament.id}
                 tournament={tournament}
+                registrations={tournament.players?.length || 0}
                 onClick={() => router.push(`/tournaments/${tournament.id}`)}
               />
             ))}
