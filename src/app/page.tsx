@@ -1,27 +1,45 @@
-"use server";
-import { auth } from "@/auth";
+"use client";
 import Dashboard from "@/components/dashboard";
 import { LoginForm } from "@/components/login-form";
 import NavBar from "@/components/navbar";
 import { Button } from "@/components/ui/button";
 import { login } from "@/lib/actions/auth";
+import { profile } from "@prisma/client";
+import { useEffect, useState } from "react";
 
-export default async function Home() {
-  const session = await auth();
+export default function Home() {
+  const [userData, setUserData] = useState<profile | null>();
+  const [isLoading, setLoading] = useState<boolean>(true);
+  useEffect(()=>{
+    const fetchData = async () => {
+      const response = await fetch('/api/register');
+      const res = await fetch('/api/user');
+
+      const res2 = await res.json();
+
+      console.log("DATA CHECK:", res2);
+
+      setUserData(res2.data);
+      setLoading(false);
+    }
+
+    fetchData();
+  }, [])
+
+
   const matches = [
     { date: "Jan 26, 2025", team1: "Chargers", team2: "Hawks", time: "5:00 PM" },
     { date: "Jan 27, 2025", team1: "Raiders", team2: "Rebels", time: "6:30 PM" },
     { date: "Jan 28, 2025", team1: "Lions", team2: "Spartans", time: "8:00 PM" },
   ];
   const playerStats = { 
-    name: session?.user?.name, 
     matchesPlayed: 11, 
     matchesWon: 7, 
     matchesLost: 3, 
     elo: 1500 
   };
 
-  if (!session?.user) {
+  if (!userData && !isLoading) {
     return (
       <div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-gradient-to-br from-gray-900 to-gray-800 p-6 md:p-10">
         <div className="flex w-full max-w-sm flex-col gap-6">
@@ -37,12 +55,12 @@ export default async function Home() {
         </div>
       </div>
     );
-  } else {
+  } else if (userData){
     return (
       <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-svh text-white">
-        <NavBar user={session.user} />
+        <NavBar user={userData} />
         <div className="container mx-auto p-6">
-          <Dashboard user={session.user} />
+          <Dashboard user={userData} />
           <section className="my-8">
             <h2 className="text-3xl font-bold mb-6">Upcoming Matches</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -81,5 +99,7 @@ export default async function Home() {
         </div>
       </div>
     );
+  } else {
+    return (<></>);
   }
 }
