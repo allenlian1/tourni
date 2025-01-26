@@ -1,6 +1,6 @@
 import { User } from "next-auth";
 
-interface CardProps {
+export interface CardProps {
     user: string,
     elo: number,
     w: string,

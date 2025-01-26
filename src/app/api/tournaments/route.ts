@@ -1,26 +1,23 @@
-import { prisma } from "@/prisma";
-import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
-    console.log("In tournament search");
+const prisma = new PrismaClient();
 
+export async function GET(){
     try {
-        // Fetch tournaments from the database
-        const tournaments = await prisma.tournament.findMany();
-        console.log("Tournaments fetched:", JSON.stringify(tournaments, null, 2)); // Pretty-print the results
+        const tournament = await prisma.tournament.findMany(
+            {
 
-        if (!tournaments || tournaments.length === 0) {
-            console.warn("No tournaments found in the database.");
+        });
+
+        if (!tournament){
+            console.error("No data returned")
+            return NextResponse.json({error: "No data returned"}, {status: 404})
         }
 
-        return NextResponse.json(tournaments);
-    } catch (err) {
-        console.error("Error fetching tournaments:", err);
-        return NextResponse.json(
-            { error: "An error occurred while fetching tournaments" },
-            { status: 500 }
-        );
-    } finally {
-        await prisma.$disconnect();
+        return NextResponse.json({data: tournament}, {status: 200});
+    } catch (error) {
+        console.error("Internal Server Error");
+        return NextResponse.json({error: "Internal Server Error"}, {status: 500});
     }
 }

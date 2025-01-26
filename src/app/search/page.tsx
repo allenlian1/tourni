@@ -10,9 +10,6 @@ export default function SearchPage() {
             Search
           </h1>
           <Slider />
-          <div>
-            
-          </div>
         </div>
       </div>
     );
