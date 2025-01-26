@@ -32,8 +32,8 @@ export function TournamentTable() {
       </TabsContent>
 
       <TabsContent value="livestream">
+            Livestream
       </TabsContent>
-            livestream
     </Tabs>
   )
 }

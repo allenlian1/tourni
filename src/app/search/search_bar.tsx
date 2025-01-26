@@ -88,25 +88,21 @@ export function Slider() {
       </TabsList>
 
       <TabsContent value="players">
-        <Card className="bg-bg-gradient-to-br from-gray-900 to-gray-800">
-          <CardContent className="p-0 pt-0">
-            <div className="space-y-1 p-4">
-              <Input
-                id="input_profile"
-                value={profileInput}
-                onChange={(e) => setProfileInput(e.target.value)}
-                onKeyDown={handleProfileInputKeyDown}
-                placeholder="Search for players here"
-                className="p-3"
-              />
-            </div>
-            <div className="space-y-4">
-              {eloCards.map((props, index) => (
-                <ELOCard key={index} {...props} />
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <div className="space-y-1 p-4">
+          <Input
+            id="input_profile"
+            value={profileInput}
+            onChange={(e) => setProfileInput(e.target.value)}
+            onKeyDown={handleProfileInputKeyDown}
+            placeholder="Search for players here"
+            className="p-3"
+          />
+        </div>
+        <div className="space-y-4">
+          {eloCards.map((props, index) => (
+            <ELOCard key={index} {...props} />
+          ))}
+        </div>
         <ScrollArea className="h-[calc(100vh-200px)] mt-4">
           <div className="space-y-4 pr-0 sm:pr-4">
             {searchResults
@@ -151,21 +147,17 @@ export function Slider() {
         </ScrollArea>
       </TabsContent>
       <TabsContent value="tournaments">
-        <Card className="bg-bg-gradient-to-br from-gray-900 to-gray-800">
-          <CardContent className="p-0 pt-0">
-            <div className="space-y-1 p-4">
-              <Input
-                id="input_tournament"
-                value={tournamentInput}
-                onChange={(e) => setTournamentInput(e.target.value)}
-                onKeyDown={handleTournamentInputKeyDown}
-                placeholder="Search for tournaments here"
-                className="p-3"
-              />
-            </div>
-          </CardContent>
-        </Card>
-        <ScrollArea className="h-[calc(100vh-200px)] mt-4">
+        <div className="space-y-1 p-4">
+          <Input
+            id="input_tournament"
+            value={tournamentInput}
+            onChange={(e) => setTournamentInput(e.target.value)}
+            onKeyDown={handleTournamentInputKeyDown}
+            placeholder="Search for tournaments here"
+            className="p-3"
+          />
+        </div>
+        <ScrollArea className="h-[calc(99vh200px)] mt-4">
           <div className="space-y-4 pr-0 sm:pr-4">
             {searchResults
               .filter((result) => result.type === "tournament")

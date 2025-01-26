@@ -1,3 +1,6 @@
+"use client"
+import { useEffect, useState } from "react"
+import { profile } from "@prisma/client"
 import { User } from "next-auth";
 
 export interface CardProps {
@@ -9,6 +12,7 @@ export interface CardProps {
 }
 
 export function ELOCard({ user , elo, w, h, isKillCard }: CardProps){
+    
     return (
         <div className={`${w} ${h} mx-auto border rounded-lg overflow-hidden bg-white mt-6 shadow-lg bg-gradient-to-br from-gray-900 to-gray-800`}>
         <div className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center font-bold py-3">
