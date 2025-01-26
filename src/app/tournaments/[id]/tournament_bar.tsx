@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/tabs"
 import Bracket from "@/temp_bracket"
 import { PlayerSection } from "./player_section"
-
+import { LiveVideoFeed } from "./components/LiveVideoFeed";
 
 export function TournamentTable() {
   return (
@@ -32,7 +32,7 @@ export function TournamentTable() {
       </TabsContent>
 
       <TabsContent value="livestream">
-            Livestream
+            <LiveVideoFeed /> {/* Use the new component here */}
       </TabsContent>
     </Tabs>
   )

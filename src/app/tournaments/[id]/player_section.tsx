@@ -2,16 +2,43 @@
 
 import { Button } from "@/components/ui/button";
 import { ELOCard } from "@/components/playerCard";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
+interface Player {
+  id: string;
+  name: string | null;
+  elo: number[];
+  email: string;
+  image?: string | null;
+}
+
 export function PlayerSection() {
   const [isEnrolled, setIsEnrolled] = useState(false); // State to track enrollment
+  const [players, setPlayers] = useState<Player[]>([]); // State to store players
   const params = useParams();
   const tournamentId = params.id as string; // Extract the `id` from the URL
   const { data: session, status } = useSession();
   const email = session?.user?.email; // Get the user's email from the session
+
+  useEffect(() => {
+    const fetchPlayers = async () => {
+      try {
+        const response = await fetch(`/api/tournaments/${tournamentId}/players`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch players');
+        }
+        const data = await response.json();
+        console.log("daaata: ", data);
+        setPlayers(data); // Update the players state
+      } catch (error) {
+        console.error('Error fetching players:', error);
+      }
+    };
+  
+    fetchPlayers();
+  }, [tournamentId]);
 
   const handleEnrollClick = async () => {
     const newEnrollmentState = !isEnrolled; // Toggle the state
@@ -76,12 +103,16 @@ export function PlayerSection() {
           </Button>
         </div>
         <div className="grid grid-cols-3 gap-4">
-          <ELOCard user={"h"} elo={1500} w={"w-full"} h={"h-50"} isKillCard={true} />
-          <ELOCard user={"h"} elo={1000} w={"w-full"} h={"h-50"} isKillCard={true} />
-          <ELOCard user={"h"} elo={2000} w={"w-full"} h={"h-50"} isKillCard={true} />
-          <ELOCard user={"h"} elo={100} w={"w-full"} h={"h-50"} isKillCard={true} />
-          <ELOCard user={"h"} elo={1300} w={"w-full"} h={"h-50"} isKillCard={true} />
-          <ELOCard user={"h"} elo={1100} w={"w-full"} h={"h-50"} isKillCard={true} />
+          {players.map((player) => (
+            <ELOCard
+              key={player.id}
+              user={player.name || "User"} // Handle null name
+              elo={player.elo?.length > 0 ? player.elo[0] : 1500} // Handle empty elo array
+              w={"w-full"}
+              h={"h-50"}
+              isKillCard={true}
+            />
+          ))}
         </div>
         <div className="pt-4 pb-20"></div>
       </div>

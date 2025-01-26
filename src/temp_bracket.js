@@ -36,7 +36,7 @@ export const SingleElimination = () => {
       id: 19753,
       nextMatchId: null,
       tournamentRoundText: "3",
-      startTime: "2021-05-30",
+      startTime: "2025-01-28",
       state: "SCHEDULED",
       participants: []
     },
@@ -44,7 +44,7 @@ export const SingleElimination = () => {
       id: 19754,
       nextMatchId: 19753,
       tournamentRoundText: "2",
-      startTime: "2021-05-30",
+      startTime: "2025-01-27",
       state: "SCHEDULED",
       participants: [
         {
@@ -52,7 +52,7 @@ export const SingleElimination = () => {
           resultText: null,
           isWinner: false,
           status: null,
-          name: "CoKe BoYz",
+          name: "TBD",
           picture: "teamlogos/client_team_default_logo"
         }
       ]
@@ -61,7 +61,7 @@ export const SingleElimination = () => {
       id: 19755,
       nextMatchId: 19754,
       tournamentRoundText: "1",
-      startTime: "2021-05-30",
+      startTime: "2025-01-26",
       state: "SCORE_DONE",
       participants: [
         {
@@ -69,7 +69,7 @@ export const SingleElimination = () => {
           resultText: "Won",
           isWinner: true,
           status: "PLAYED",
-          name: "CoKe BoYz",
+          name: "TBD",
           picture: "teamlogos/client_team_default_logo"
         },
         {
@@ -77,7 +77,7 @@ export const SingleElimination = () => {
           resultText: "Lost",
           isWinner: false,
           status: "PLAYED",
-          name: "Aids Team",
+          name: " TBD",
           picture: "teamlogos/client_team_default_logo"
         }
       ]
@@ -86,7 +86,7 @@ export const SingleElimination = () => {
       id: 19756,
       nextMatchId: 19754,
       tournamentRoundText: "1",
-      startTime: "2021-05-30",
+      startTime: "2025-01-26",
       state: "RUNNING",
       participants: [
         {
@@ -94,7 +94,7 @@ export const SingleElimination = () => {
           resultText: null,
           isWinner: false,
           status: null,
-          name: "Art of kill",
+          name: "TBD",
           picture: "teamlogos/client_team_default_logo"
         }
       ]
@@ -103,7 +103,7 @@ export const SingleElimination = () => {
       id: 19757,
       nextMatchId: 19753,
       tournamentRoundText: "2",
-      startTime: "2021-05-30",
+      startTime: "2025-01-27",
       state: "SCHEDULED",
       participants: []
     },
@@ -111,7 +111,7 @@ export const SingleElimination = () => {
       id: 19758,
       nextMatchId: 19757,
       tournamentRoundText: "1",
-      startTime: "2021-05-30",
+      startTime: "2025-01-26",
       state: "SCHEDULED",
       participants: [
         {
@@ -119,7 +119,7 @@ export const SingleElimination = () => {
           resultText: null,
           isWinner: false,
           status: null,
-          name: "Crazy Pepes",
+          name: "TBD",
           picture: "teamlogos/client_team_default_logo"
         }
       ]
@@ -128,7 +128,7 @@ export const SingleElimination = () => {
       id: 19759,
       nextMatchId: 19757,
       tournamentRoundText: "1",
-      startTime: "2021-05-30",
+      startTime: "2025-01-26",
       state: "SCHEDULED",
       participants: [
         {
@@ -136,7 +136,7 @@ export const SingleElimination = () => {
           resultText: null,
           isWinner: false,
           status: null,
-          name: "BLUEJAYS",
+          name: "TBD",
           picture: "teamlogos/client_team_default_logo"
         },
         {
@@ -144,7 +144,7 @@ export const SingleElimination = () => {
           resultText: null,
           isWinner: false,
           status: null,
-          name: "Bosphorus",
+          name: "TBD",
           picture: "teamlogos/r7zn4gr8eajivapvjyzd"
         }
       ]

@@ -20,12 +20,12 @@ model match {
 model profile {
   id      String   @id(map: "profiles_pkey") @default(uuid()) @db.Uuid
   history Json[]
-  cards   String[] @db.Uuid
   record  Json[]
   elo     Float[]  @db.Real
   name    String?
   email   String
   image   String?
+  cards   String[]
 }
 
 model team {
