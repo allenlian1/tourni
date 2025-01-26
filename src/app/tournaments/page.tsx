@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation"; // Use the navigation hook
 import NavBar from "@/components/navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TournamentCard } from "@/components/tournamentCard";
-import { tournament, status, tournament_types } from "@prisma/client";
+import { tournaments, status, tournament_types } from "@prisma/client";
 
 // Extended type to include additional fields
-type TournamentWithDetails = tournament & {
+type TournamentWithDetails = tournaments & {
   sport: string;
   registrations: number;
 };
