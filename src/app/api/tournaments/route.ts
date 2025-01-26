@@ -1,33 +1,23 @@
 import { PrismaClient } from "@prisma/client";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request) {
-
-    console.log("in player search");
+export async function GET(){
     try {
-        const { searchParams } = new URL(request.url);
-        const query = session.id
-        console.log("Query:", query);
+        const tournament = await prisma.tournament.findMany(
+            {
 
-        const profiles = await prisma.profile.findMany({
-            where: {
-                name: {
-                    contains: `${query}`,
-                    mode: "insensitive"
-                }
-            },
         });
-        console.log(JSON.stringify(profiles));
-        return NextResponse.json(profiles);
-    } catch (err) {
-        console.error("Error: ", err);
-        return NextResponse.json(
-            { error: "An error occurred while fetching profiles" },
-            { status: 500 }
-        );
-    } finally {
-        await prisma.$disconnect();
+
+        if (!tournament){
+            console.error("No data returned")
+            return NextResponse.json({error: "No data returned"}, {status: 404})
+        }
+
+        return NextResponse.json({data: tournament}, {status: 200});
+    } catch (error) {
+        console.error("Internal Server Error");
+        return NextResponse.json({error: "Internal Server Error"}, {status: 500});
     }
 }
