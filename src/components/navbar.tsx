@@ -20,6 +20,11 @@ const btns = [
     route: "/tournaments",
   },
   {
+    icon: PlusCircle,
+    title: "Add",
+    route: "/add",
+  },
+  {
     icon: Search,
     title: "Search",
     route: "/search",

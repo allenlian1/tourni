@@ -14,8 +14,8 @@ export default async function AccountPage() {
 
   const session = await auth();
     return (
-      <div>
-        <h1 className="flex justify-center mt-10">
+      <div className="bg-gradient-to-br from-gray-900 to-gray-800 min-h-svh text-white">
+        <h1 className="flex justify-center pt-10">
           <Avatar className="h-16 w-16">
             <AvatarImage src={session?.user?.image!} alt="@shadcn" />
             <AvatarFallback>CN</AvatarFallback>
@@ -45,7 +45,7 @@ export default async function AccountPage() {
           </div>
         </div>
 
-        <div className="flex justify-center mt-4 mb-20">
+        <div className="flex justify-center pt-4 pb-20">
           <Button className="bg-white text-muted hover:bg-muted hover:text-white" variant="destructive" onClick={logout}>
             Sign Out
           </Button>
