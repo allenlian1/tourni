@@ -55,9 +55,9 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
   return (
     <div className="h-screen flex flex-col p-6">
       {tournament && (
-        <div className="border-b pb-4 mb-6">
-          <h1 className="text-3xl font-bold mb-2">Tournament Name{tournament.name}</h1>
-          <p className="text-sm text-gray-300 flex justify-between items-center">
+        <div className="border-b pb-4 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center6">
+          <h1 className="text-3xl font-bold mb-2 sm:mb-0">Tournament Name{tournament.name}</h1>
+          <p className="text-sm text-gray-300 flex flex-wrap items-center">
             <span>
               {new Date(tournament.start_date).toLocaleDateString()} - {new Date(tournament.end_date).toLocaleDateString()}
             </span>
@@ -65,7 +65,7 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
           </p>
         </div>
       )}
-      <div className="flex-1 relative overflow-hidden pt-16">
+      <div className="flex-1 relative overflow-hidden pt-6 sm:pt-16">
         <div className="absolute inset-0 overflow-auto">
           <TournamentTable />
         </div>

@@ -10,11 +10,17 @@ import { PlayerSection } from "./player_section"
 
 export function TournamentTable() {
   return (
-    <Tabs defaultValue="account" className="w-[400px]">
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="bracket">Bracket</TabsTrigger>
-        <TabsTrigger value="players">Players</TabsTrigger>
-        <TabsTrigger value="livestream">Livestream</TabsTrigger>
+    <Tabs defaultValue="account">
+      <TabsList className="flex w-full flex-wrap sm:flex-nowrap gap-2 justify-center">
+        <TabsTrigger value="bracket" className="flex-1 text-center sm:w-auto">
+          Bracket
+        </TabsTrigger>
+        <TabsTrigger value="players" className="flex-1 text-center sm:w-auto">
+          Players
+        </TabsTrigger>
+        <TabsTrigger value="livestream" className="flex-1 text-center sm:w-auto">
+          Livestream
+        </TabsTrigger>
       </TabsList>
 
       <TabsContent value="bracket">
