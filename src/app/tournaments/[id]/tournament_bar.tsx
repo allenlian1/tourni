@@ -16,6 +16,8 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import Bracket from "@/temp_bracket"
+import { PlayerSection } from "./player_section"
+
 
 export function TournamentTable() {
   return (
@@ -27,23 +29,29 @@ export function TournamentTable() {
       </TabsList>
 
       <TabsContent value="bracket">
-        <Card>
-          <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-            
-            <Bracket />
+        <div>
+            <Card>
+            <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
+                
+                <Bracket />
 
-          </CardContent>
-        </Card>
+            </CardContent>
+            </Card>
+        </div>
+        
       </TabsContent>
 
       <TabsContent value="players">
-        <Card>
-          <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-            
-            players
+        <div>
+            <Card>
+            <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
+                
+                <PlayerSection />
 
-          </CardContent>
-        </Card>
+            </CardContent>
+            </Card>
+        </div>
+       
       </TabsContent>
 
       <TabsContent value="livestream">
