@@ -1,5 +1,5 @@
 "use client";
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/app/search/search_bar";
 
 
 export default function SearchPage() {

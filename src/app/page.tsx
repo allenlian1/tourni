@@ -13,7 +13,13 @@ export default async function Home() {
     { date: "Jan 27, 2025", team1: "Raiders", team2: "Rebels", time: "6:30 PM" },
     { date: "Jan 28, 2025", team1: "Lions", team2: "Spartans", time: "8:00 PM" },
   ];
-  const playerStats = { name: session?.user?.name, matchesPlayed: 11, matchesWon: 7, matchesLost: 3, elo: 1500 };
+  const playerStats = { 
+    name: session?.user?.name, 
+    matchesPlayed: 11, 
+    matchesWon: 7, 
+    matchesLost: 3, 
+    elo: 1500 
+  };
 
   if (!session?.user) {
     return (
@@ -55,15 +61,15 @@ export default async function Home() {
             <h2 className="text-3xl font-bold mb-6">Your Stats</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
               <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 className="text-lg font-semibold">Matches Played</h3>
+                <h3 className="text-lg font-semibold">Played</h3>
                 <p className="text-sm text-gray-400">{playerStats.matchesPlayed}</p>
               </div>
               <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 className="text-lg font-semibold">Matches Won</h3>
+                <h3 className="text-lg font-semibold">Won</h3>
                 <p className="text-sm text-gray-400">{playerStats.matchesWon}</p>
               </div>
               <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                <h3 className="text-lg font-semibold">Matches Lost</h3>
+                <h3 className="text-lg font-semibold">Lost</h3>
                 <p className="text-sm text-gray-400">{playerStats.matchesLost}</p>
               </div>
               <div className="p-6 bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
