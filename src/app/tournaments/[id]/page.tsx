@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { tournament, status, tournament_types } from "@prisma/client";
 import { TournamentTable } from "./tournament_bar";
 
 interface TournamentData {
@@ -52,23 +53,18 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
   }
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex flex-col p-6">
       {tournament && (
-        <div>
-          <p>
-            Name: {tournament.name}
-          </p>
-          <p>
-            Start Date: {new Date(tournament.start_date).toLocaleDateString()}
-          </p>
-          <p>
-            End Date: {new Date(tournament.end_date).toLocaleDateString()}
-          </p>
-          <p>
-            Capacity: {tournament.capacity}
+        <div className="border-b pb-4 mb-6">
+          <h1 className="text-3xl font-bold mb-2">Tournament Name{tournament.name}</h1>
+          <p className="text-sm text-gray-300 flex justify-between items-center">
+            <span>
+              {new Date(tournament.start_date).toLocaleDateString()} - {new Date(tournament.end_date).toLocaleDateString()}
+            </span>
+            <span className="ml-4 font-medium">Capacity: {tournament.capacity}</span>
           </p>
         </div>
-        )}
+      )}
       <div className="flex-1 relative overflow-hidden pt-16">
         <div className="absolute inset-0 overflow-auto">
           <TournamentTable />

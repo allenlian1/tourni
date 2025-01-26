@@ -1,14 +1,3 @@
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Tabs,
   TabsContent,
@@ -16,6 +5,8 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import Bracket from "@/temp_bracket"
+import { PlayerSection } from "./player_section"
+
 
 export function TournamentTable() {
   return (
@@ -32,6 +23,7 @@ export function TournamentTable() {
 
       <TabsContent value="players">
             players
+            <PlayerSection />
       </TabsContent>
 
       <TabsContent value="livestream">
