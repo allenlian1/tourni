@@ -27,33 +27,15 @@ export function TournamentTable() {
       </TabsList>
 
       <TabsContent value="bracket">
-        <Card>
-          <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-            
             <Bracket />
-
-          </CardContent>
-        </Card>
       </TabsContent>
 
       <TabsContent value="players">
-        <Card>
-          <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-            
             players
-
-          </CardContent>
-        </Card>
       </TabsContent>
 
       <TabsContent value="livestream">
-        <Card>
-          <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-            
             livestream
-
-          </CardContent>
-        </Card>
       </TabsContent>
     </Tabs>
   )
