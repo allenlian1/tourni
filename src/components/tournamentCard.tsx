@@ -70,6 +70,7 @@ export function TournamentCard({ tournament, registrations, onClick }: Tournamen
             </div>
           </div>
         </div>
+        </div>
       </Card>
       // <div>{tournament.name}</div>
     );
