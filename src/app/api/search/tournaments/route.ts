@@ -2,10 +2,10 @@ import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { auth } from "@/auth"; // Import the auth function
 
-const session = await auth();
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
+    const session = await auth();
 
     console.log("in player search");
     try {

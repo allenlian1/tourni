@@ -26,10 +26,10 @@ export default function Tournament({ params }: { params: Promise<{ id: string }>
     const fetchTournament = async () => {
       try {
         const id = (await params).id;
-        const response = await fetch(`/api/search/tournaments?id=${id}`);
+        const response = await fetch(`/api/tournaments?id=${id}`);
         const res = await response.json();
 
-        console.log("DATA WORKED: ", res.data);
+        console.log("DATA WORKED: ", res);
         setTournament(res.data); // Set the fetched data to state
       } catch (err: any) {
         console.error("Error: ", err.message);
