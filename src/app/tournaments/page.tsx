@@ -4,13 +4,11 @@ import { useState, useEffect } from "react"; // Use hooks for state and effects
 import { useRouter } from "next/navigation"; // Use the navigation hook
 import NavBar from "@/components/navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { tournament, status, tournament_types } from "@prisma/client";
 import { TournamentCard } from "@/components/tournamentCard";
-import { Skeleton } from "@/components/ui/skeleton"
-
+import { tournaments, status, tournament_types } from "@prisma/client";
 
 // Extended type to include additional fields
-type TournamentWithDetails = tournament & {
+type TournamentWithDetails = tournaments & {
   sport: string;
   registrations: number;
 };
@@ -32,9 +30,9 @@ export default function TournamentsPage() {
       try {
         const response = await fetch(`/api/tournaments`);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch tournaments");
-        }
+        // if (!response.ok) {
+        //   throw new Error("Failed to fetch tournaments");
+        // }
 
         const data = await response.json();
 
@@ -98,7 +96,7 @@ export default function TournamentsPage() {
               <TournamentCard
                 key={tournament.id}
                 tournament={tournament}
-                registrations={tournament.players?.length || 0}
+                // registrations={tournament.players?.length || 0}
                 onClick={() => router.push(`/tournaments/${tournament.id}`)}
               />
             ))}
