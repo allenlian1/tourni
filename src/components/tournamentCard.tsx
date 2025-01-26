@@ -1,19 +1,18 @@
-import { tournaments, status } from "@prisma/client";
+import { tournament, status } from "@prisma/client";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { User } from "next-auth";
 import { Card } from "@/components/ui/card";
 
 interface TournamentCardProps {
-  tournament: tournaments & {
-    name: string;
+  tournament: tournament & {
     sport: string;
     registrations: number;
   };
   onClick: () => void;
 }
 
-export function TournamentCard({ name, tournament, onClick }: TournamentCardProps) {
+export function TournamentCard({ tournament, onClick }: TournamentCardProps) {
     return (
       <Card
         onClick={onClick}
@@ -32,21 +31,14 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
   
           {/* Tournament Details */}
           <div className="p-4 sm:p-6 flex-1">
-            <div className="flex flex-col sm:flex-col items-start sm:items-end gap-2 sm:gap-4">
-              <h2 className="text-lg sm:text-xl font-semibold">
-                {name}
-              </h2>
+            <div className="flex flex-row sm:flex-row items-start sm:items-end gap-2 sm:gap-4">
               <Badge variant={tournament.status === status.ongoing ? "default" : "secondary"}>
                 {tournament.status}
               </Badge>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-400">
-                {tournament.tournament_name} Tournament
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-400 p-3">
+                {tournament.name}
               </h2>
-            </div>
-            
+            </div>            
   
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
