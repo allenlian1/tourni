@@ -73,6 +73,7 @@ export function TournamentCard({ tournament, onClick }: TournamentCardProps) {
             </div>
           </div>
         </div>
+        </div>
       </Card>
     );
   }
