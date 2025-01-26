@@ -77,7 +77,7 @@ export default function TournamentsPage() {
       <div className="p-4 sm:p-6 pb-20">
         <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Tournaments</h1>
         <ScrollArea className="h-auto sm:h-[calc(100vh-160px)]">
-          <div className="space-y-4 pr-0 sm:pr-4">
+          <div className="space-y-4 pr-0 sm:pr-0">
             {sortedTournaments.map((tournament) => (
               <TournamentCard
                 key={tournament.id}

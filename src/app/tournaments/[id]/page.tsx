@@ -1,40 +1,61 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-export default async function Tournament({
-    params
-} : {
-    params: Promise<{ id: string }>
+export default function Tournament({
+  params,
+}: {
+  params: { id: string };
 }) {
+  const [tournament, setTournament] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-    
-    useEffect(()=>{
-        const fetchTournament = async () => {
-            const id = (await params).id;
-            const { data, error } = await fetch(`/api/search/tournaments?id=${id}`);
-            const res = data.json();
+  useEffect(() => {
+    const fetchTournament = async () => {
+      try {
+        const response = await fetch(`/api/search/tournaments?id=${params.id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch tournament data");
+        }
 
-            if (error) {
-                console.error("Error: ", error.message);
-                return;
-            }
+        const data = await response.json();
+        if (!data || !data[0]) {
+          throw new Error("No data returned");
+        }
 
-            if (!res || !data || !data[0]) {
-                console.error("Error, no data returned");
-                return;
-            }
+        console.log("DATA WORKED: ", data[0]);
+        setTournament(data[0]); // Set the fetched data to state
+      } catch (err: any) {
+        console.error("Error: ", err.message);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-            console.log("DATA WORKED: ", res);
+    fetchTournament();
+  }, [params.id]); // Add params.id as a dependency
 
-            // setInformation(res[0]);
-        };
+  if (loading) {
+    return <div className="m-4">Loading...</div>;
+  }
 
-        fetchTournament();
-    }, []);
+  if (error) {
+    return <div className="m-4">Error: {error}</div>;
+  }
 
-    return (
-        <div className="m-4">
-            <h2>Testing</h2>
+  return (
+    <div className="m-4">
+      <h2>Testing</h2>
+      {tournament && (
+        <div>
+          <h3>{tournament.name}</h3>
+          <p>Start Date: {new Date(tournament.start_date).toLocaleDateString()}</p>
+          <p>End Date: {new Date(tournament.end_date).toLocaleDateString()}</p>
+          <p>Status: {tournament.status}</p>
+          <p>Capacity: {tournament.capacity}</p>
         </div>
-    );
+      )}
+    </div>
+  );
 }
