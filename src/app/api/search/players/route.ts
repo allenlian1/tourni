@@ -4,23 +4,22 @@ import { NextResponse } from "next/server";
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
-
     console.log("in player search");
     try {
         const { searchParams } = new URL(request.url);
-        const query = searchParams.get('q');
-        console.log("Query:", query);
+        const query = searchParams.get('q') || "";
 
-        const profiles = await prisma.profile.findMany({
+        const filteredProfiles = await prisma.profile.findMany({
             where: {
                 name: {
-                    contains: `${query}`,
-                    mode: "insensitive"
-                }
+                    contains: query,
+                    mode: "insensitive",
+                },
             },
         });
-        console.log(JSON.stringify(profiles));
-        return NextResponse.json(profiles);
+
+        console.log(filteredProfiles);
+        return NextResponse.json({ filteredProfiles }, { status: 200 });
     } catch (err) {
         console.error("Error: ", err);
         return NextResponse.json(

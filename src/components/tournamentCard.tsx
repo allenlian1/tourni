@@ -14,9 +14,9 @@ export function TournamentCard({ tournament, onClick }: TournamentCardProps) {
     return (
       <Card
         onClick={onClick}
-        className="sm:h-32 h-10 cursor-pointer transition-all hover:bg-muted/50 p-0 mb-0"
+        className="sm:h-32 h-auto cursor-pointer transition-all hover:bg-muted/50 p-0 mb-4"
       >
-        <div className="flex flex-col h-full w-full sm:flex-row items-start">
+        <div className="flex flex-col sm:flex-row w-full">
           {/* Tournament Image */}
           <div className="relative w-full sm:w-56 h-32 sm:h-32 flex-shrink-0 rounded-t-md sm:rounded-l-md sm:rounded-r-none overflow-hidden">
             <Image
@@ -29,20 +29,24 @@ export function TournamentCard({ tournament, onClick }: TournamentCardProps) {
   
           {/* Tournament Details */}
           <div className="p-4 sm:p-6 flex-1">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 ">
+            
 
-              <Badge variant={tournament.status === status.ongoing ? "default" : "secondary"}>
-                {tournament.status}
-              </Badge>
-            </div>
+          <div className="flex items-center justify-between">
+            {/* Tournament Name */}
+            <h2 className="text-base sm:text-lg font-semibold text-white truncate">
+              {tournament.name}
+            </h2>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 ">
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-400">
-                {tournament.name}
-              </h2>
-            </div>            
+            {/* Badge aligned to the right */}
+            <Badge
+              variant={tournament.status === status.ongoing ? "default" : "secondary"}
+              className="ml-auto"
+            >
+              {tournament.status}
+            </Badge>
+          </div>         
   
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <Image
                   src="/badminton-icon.svg"
@@ -69,6 +73,5 @@ export function TournamentCard({ tournament, onClick }: TournamentCardProps) {
           </div>
         </div>
       </Card>
-      // <div>{tournament.name}</div>
     );
   }
