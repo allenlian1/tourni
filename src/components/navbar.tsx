@@ -16,7 +16,7 @@ const btns = [
   },
   {
     icon: CalendarCheck2,
-    title: "Tournaments",
+    title: "Schedule",
     route: "/tournaments",
   },
   {
