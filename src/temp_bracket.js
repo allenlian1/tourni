@@ -1,30 +1,35 @@
 import { SingleEliminationBracket, DoubleEliminationBracket, Match, SVGViewer } from '@g-loot/react-tournament-brackets';
+import { useWindowSize } from "@uidotdev/usehooks";
 import React from 'react';
 
 export default function Bracket() {
     return <SingleElimination />;
   }
   
-export const SingleElimination = () => (
-  <SingleEliminationBracket
-    matches={simpleSmallBracket}
-    matchComponent={Match}
-    svgWrapper={({ children, ...props }) => (
-      <SVGViewer
-        width={10000}
-        height={5000}
-        background="rgb(11, 13, 19)"
-        SVGBackground="rgb(11, 13, 19)"
-        {...props}
-      >
-        {children}
-      </SVGViewer>
-    )}
-    onMatchClick={(match) => console.log(match)}
-    onPartyClick={(match) => console.log(match)}
-  />
-);
-  
+export const SingleElimination = () => {
+ const size = useWindowSize();
+  const finalWidth = Math.max(size.width - 50, 500);
+  const finalHeight = Math.max(size.height - 100, 500);
+  return (
+    <SingleEliminationBracket
+      matches={simpleSmallBracket}
+      matchComponent={Match}
+      svgWrapper={({ children, ...props }) => (
+        <SVGViewer
+          width={finalWidth}
+          height={finalHeight}
+          background="rgb(11, 13, 19)"
+          SVGBackground="rgb(11, 13, 19)"
+          {...props}
+        >
+          {children}
+        </SVGViewer>
+      )}
+      onMatchClick={(match) => console.log(match)}
+      onPartyClick={(match) => console.log(match)}
+    />
+  );
+} 
   
   export const simpleSmallBracket = [
     {

@@ -1,14 +1,3 @@
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Tabs,
   TabsContent,
@@ -35,39 +24,16 @@ export function TournamentTable() {
       </TabsList>
 
       <TabsContent value="bracket">
-        <div>
-            <Card>
-            <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-                
-                <Bracket />
-
-            </CardContent>
-            </Card>
-        </div>
-        
+            <Bracket />
       </TabsContent>
 
       <TabsContent value="players">
-        <div>
-            <Card>
-            <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-                
-                <PlayerSection />
-
-            </CardContent>
-            </Card>
-        </div>
-       
+            players
+            <PlayerSection />
       </TabsContent>
 
       <TabsContent value="livestream">
-        <Card>
-          <CardContent className="flex flex-col h-[calc(100vh-4rem)] min-w-[800px] min-h-[400px] overflow-auto p-4 relative">
-            
             livestream
-
-          </CardContent>
-        </Card>
       </TabsContent>
     </Tabs>
   )
