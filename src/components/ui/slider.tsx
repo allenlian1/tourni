@@ -22,6 +22,7 @@ type SearchResult = {
   capacity?: number;
   players?: string[];
 };
+
 import { ELOCard, CardProps } from "@/components/playerCard";
 
 export function Slider() {
@@ -65,13 +66,13 @@ export function Slider() {
         end_date: new Date(result.end_date),
         status: result.status,
         capacity: result.capacity,
-        players: result.players,
+        players: result.players
       })));
     }
   };
 
   return (
-    <Tabs defaultValue="players" className="w-[600px]">
+    <Tabs defaultValue="players" className="w-full max-w-[1600px] mx-auto px-4">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="players">Players</TabsTrigger>
         <TabsTrigger value="tournaments">Tournaments</TabsTrigger>

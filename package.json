@@ -13,6 +13,7 @@
   "dependencies": {
     "@auth/pg-adapter": "^1.7.4",
     "@auth/prisma-adapter": "^2.7.4",
+    "@g-loot/react-tournament-brackets": "^1.0.31-rc",
     "@prisma/adapter-neon": "^6.2.1",
     "@prisma/client": "^6.2.1",
     "@prisma/extension-accelerate": "^1.2.1",
@@ -28,8 +29,9 @@
     "lucide-react": "^0.474.0",
     "next": "15.1.6",
     "next-auth": "^5.0.0-beta.25",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.14",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7"
   },
