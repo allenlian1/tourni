@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation"; // Use the navigation hook
 import NavBar from "@/components/navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TournamentCard } from "@/components/tournamentCard";
-import { tournaments, status, tournament_types } from "@prisma/client";
+import { tournament, status, tournament_types } from "@prisma/client";
 
 // Extended type to include additional fields
-type TournamentWithDetails = tournaments & {
+type TournamentWithDetails = tournament & {
   sport: string;
   registrations: number;
 };
@@ -87,7 +87,7 @@ export default function TournamentsPage() {
               <TournamentCard
                 key={tournament.id}
                 tournament={tournament}
-                // registrations={tournament.players?.length || 0}
+                registrations={tournament.players?.length || 0}
                 onClick={() => router.push(`/tournaments/${tournament.id}`)}
               />
             ))}
