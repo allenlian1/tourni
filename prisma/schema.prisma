@@ -42,6 +42,7 @@ model tournament {
   tournament_type tournament_types?
   status          status?
   name            String?
+  admin           String?           @db.Uuid
 }
 
 model Account {
