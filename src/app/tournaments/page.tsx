@@ -6,6 +6,7 @@ import NavBar from "@/components/navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { TournamentCard } from "@/components/tournamentCard";
 import { tournaments, status, tournament_types } from "@prisma/client";
+import { Skeleton } from "@/components/ui/skeleton"
 
 // Extended type to include additional fields
 type TournamentWithDetails = tournaments & {
