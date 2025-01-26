@@ -10,9 +10,7 @@ interface TournamentCardProps {
   onClick: () => void
 }
 
-export function TournamentCard({ tournament, registrations, onClick }: TournamentCardProps) {
-  console.log("Tournament Card Props:", { tournament, registrations }); // Add this line
-  // console.log("TOURNAMENT: ", tournament.name)
+export function TournamentCard({ tournament, onClick }: TournamentCardProps) {
     return (
       <Card
         onClick={onClick}

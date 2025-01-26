@@ -24,6 +24,7 @@ model profile {
   record  Json[]
   elo     Float[]  @db.Real
   name    String?
+  email   String   @unique
 }
 
 model team {
