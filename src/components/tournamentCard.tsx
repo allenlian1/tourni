@@ -1,25 +1,24 @@
-import { tournaments, status } from "@prisma/client";
+import { tournament, status } from "@prisma/client";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { User } from "next-auth";
 import { Card } from "@/components/ui/card";
 
 interface TournamentCardProps {
-  tournament: tournaments & {
-    name: string;
-    sport: string;
-    registrations: number;
-  };
-  onClick: () => void;
+  tournament: tournament,
+  registrations: number,
+  onClick: () => void
 }
 
-export function TournamentCard({ name, tournament, onClick }: TournamentCardProps) {
+export function TournamentCard({ tournament, registrations, onClick }: TournamentCardProps) {
+  console.log("Tournament Card Props:", { tournament, registrations }); // Add this line
+  // console.log("TOURNAMENT: ", tournament.name)
     return (
       <Card
         onClick={onClick}
-        className="sm:h-32 cursor-pointer transition-all hover:bg-muted/50 p-0 mb-0"
+        className="sm:h-32 h-10 cursor-pointer transition-all hover:bg-muted/50 p-0 mb-0"
       >
-        <div className="flex flex-col sm:flex-row items-start">
+        <div className="flex flex-col h-full w-full sm:flex-row items-start">
           {/* Tournament Image */}
           <div className="relative w-full sm:w-56 h-32 sm:h-32 flex-shrink-0 rounded-t-md sm:rounded-l-md sm:rounded-r-none overflow-hidden">
             <Image
@@ -32,21 +31,18 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
   
           {/* Tournament Details */}
           <div className="p-4 sm:p-6 flex-1">
-            <div className="flex flex-col sm:flex-col items-start sm:items-end gap-2 sm:gap-4">
-              <h2 className="text-lg sm:text-xl font-semibold">
-                {name}
-              </h2>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 ">
+
               <Badge variant={tournament.status === status.ongoing ? "default" : "secondary"}>
                 {tournament.status}
               </Badge>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 ">
               <h2 className="text-lg sm:text-xl font-semibold text-gray-400">
-                {tournament.tournament_name} Tournament
+                {tournament.name}
               </h2>
-            </div>
-            
+            </div>            
   
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
@@ -56,7 +52,7 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
                   width={20}
                   height={20}
                 />
-                <span>{tournament.sport}</span>
+                {/* <span>{tournament.sport}</span> */}
               </div>
   
               <span className="hidden sm:block">•</span>
@@ -74,6 +70,8 @@ export function TournamentCard({ name, tournament, onClick }: TournamentCardProp
             </div>
           </div>
         </div>
+        </div>
       </Card>
+      // <div>{tournament.name}</div>
     );
   }
