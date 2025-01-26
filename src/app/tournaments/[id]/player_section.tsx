@@ -8,7 +8,7 @@ export function PlayerSection() {
                 <div className="bg-gradient-to-br from-gray-900 to-gray-800 h-full text-white rounded-lg p-6">
                     <div className="flex justify-between items-center mb-6">
                         <h1 className="scroll-m-20 text-2xl font-semibold tracking-tight lg:text-3xl">
-                            Enrolled
+                            Players
                         </h1>
                         <Button className="ml-4">Enroll</Button>
                     </div>

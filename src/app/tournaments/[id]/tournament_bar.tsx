@@ -28,13 +28,12 @@ export function TournamentTable() {
       </TabsContent>
 
       <TabsContent value="players">
-            players
             <PlayerSection />
       </TabsContent>
 
       <TabsContent value="livestream">
-            livestream
       </TabsContent>
+            livestream
     </Tabs>
   )
 }
