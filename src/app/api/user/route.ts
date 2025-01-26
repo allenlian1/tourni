@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   try {
     const session = await auth();
 
-    const userData = await prisma.profile.findUnique({
+    const userData = await prisma.profile.findFirst({
         where: { 
             email: session?.user?.email! 
         },

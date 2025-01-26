@@ -9,6 +9,8 @@ export async function GET() {
     try {
         const email = session?.user?.email!;
         const name = session?.user?.name;
+        const image = session?.user?.image;
+        console.log("image: ", image)
         let response;
 
         const filteredProfiles = await prisma.profile.findFirst({
@@ -26,6 +28,7 @@ export async function GET() {
                 data: {
                     email: email,
                     name: name,
+                    image: image,
                     elo: [500],
                 }
            });

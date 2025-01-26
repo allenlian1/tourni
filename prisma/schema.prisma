@@ -1,133 +1,135 @@
-  generator client {
-    provider = "prisma-client-js"
-  }
+generator client {
+  provider = "prisma-client-js"
+}
 
-  datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
-  }
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
 
-  model match {
-    id         String      @id(map: "matches_pkey") @default(uuid()) @db.Uuid
-    teams      String[]    @db.Uuid
-    winner     String?     @db.Uuid
-    tournament String?     @db.Uuid
-    start_time DateTime?   @db.Date
-    scores     Int[]
-    match_type match_type?
-  }
+model match {
+  id         String      @id(map: "matches_pkey") @default(uuid()) @db.Uuid
+  teams      String[]    @db.Uuid
+  winner     String?     @db.Uuid
+  tournament String?     @db.Uuid
+  start_time DateTime?   @db.Date
+  scores     Int[]
+  match_type match_type?
+}
 
-  model profile {
-    id      String   @id(map: "profiles_pkey") @default(uuid()) @db.Uuid
-    history Json[]
-    cards   String[] @db.Uuid
-    record  Json[]
-    elo     Float[]  @db.Real
-    name    String?
-    email   String   @unique
-  }
+model profile {
+  id      String   @id(map: "profiles_pkey") @default(uuid()) @db.Uuid
+  history Json[]
+  cards   String[] @db.Uuid
+  record  Json[]
+  elo     Float[]  @db.Real
+  name    String?
+  email   String
+  image   String?
+}
 
-  model team {
-    id      String   @id(map: "teams_pkey") @default(uuid()) @db.Uuid
-    name    String?
-    players String[] @db.Uuid
-  }
+model team {
+  id      String   @id(map: "teams_pkey") @default(uuid()) @db.Uuid
+  name    String?
+  players String[] @db.Uuid
+}
 
-  model tournament {
-    id              String            @id(map: "tournaments_pkey") @default(uuid()) @db.Uuid
-    capacity        Int?
-    sport           String?
-    players         String[]          @db.Uuid
-    matches         String[]          @db.Uuid
-    start_date      DateTime?         @db.Date
-    end_date        DateTime?         @db.Date
-    tournament_type tournament_types?
-    status          status?
-    name            String?
-  }
+model tournament {
+  id              String            @id(map: "tournaments_pkey") @default(uuid()) @db.Uuid
+  capacity        Int?
+  players         String[]          @db.Uuid
+  matches         String[]          @db.Uuid
+  start_date      DateTime?         @db.Date
+  end_date        DateTime?         @db.Date
+  tournament_type tournament_types?
+  status          status?
+  name            String?
+  admin           String?           @db.Uuid
+  sport           String?
+}
 
-  model Account {
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String?
-    access_token      String?
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String?
-    session_state     String?
-    createdAt         DateTime @default(now())
-    updatedAt         DateTime
-    User              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime
+  User              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@id([provider, providerAccountId])
-  }
+  @@id([provider, providerAccountId])
+}
 
-  model Authenticator {
-    credentialID         String  @unique
-    userId               String
-    providerAccountId    String
-    credentialPublicKey  String
-    counter              Int
-    credentialDeviceType String
-    credentialBackedUp   Boolean
-    transports           String?
-    User                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+  User                 User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@id([userId, credentialID])
-  }
+  @@id([userId, credentialID])
+}
 
-  model Session {
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    createdAt    DateTime @default(now())
-    updatedAt    DateTime
-    User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  }
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 
-  model User {
-    id            String          @id
-    name          String?
-    email         String          @unique
-    emailVerified DateTime?
-    image         String?
-    createdAt     DateTime        @default(now())
-    updatedAt     DateTime
-    Account       Account[]
-    Authenticator Authenticator[]
-    Session       Session[]
-  }
+model User {
+  id            String          @id
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime
+  Account       Account[]
+  Authenticator Authenticator[]
+  Session       Session[]
+}
 
-  model VerificationToken {
-    identifier String
-    token      String
-    expires    DateTime
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
 
-    @@id([identifier, token])
-  }
+  @@id([identifier, token])
+}
 
-  enum match_type {
-    singles
-    doubles
-  }
+enum match_type {
+  singles
+  doubles
+}
 
-  enum status {
-    upcoming
-    ongoing
-    finished
-  }
+enum status {
+  upcoming
+  ongoing
+  finished
+}
 
-  enum status_enum {
-    upcoming
-    ongoing
-    finished
-  }
+enum status_enum {
+  upcoming
+  ongoing
+  finished
+}
 
-  enum tournament_types {
-    single_elimination
-    double_elimination
-    round_robin
-  }
+enum tournament_types {
+  single_elimination
+  double_elimination
+  round_robin
+}
