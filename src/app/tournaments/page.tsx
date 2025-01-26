@@ -38,7 +38,7 @@ export default function TournamentsPage() {
         // }
 
         const data = await response.json();
-        console.log("DATA DATA DATA DATA", data)
+        console.log("DATA DATA DATA DATA", data.data[0])
 
         const formattedTournaments = data.data.map((tournament: any) => ({
           ...tournament,

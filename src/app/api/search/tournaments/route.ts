@@ -6,6 +6,7 @@ import { auth } from "@/auth"; // Import the auth function
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
+    const session = await auth();
 
     console.log("in tournament search");
     try {
